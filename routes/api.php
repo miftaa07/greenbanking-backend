@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,7 @@ Route::post('/contact', [ContactController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',    [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    
+    // Profile
+    Route::put('/profile/update', [ProfileController::class, 'update']);
 });
