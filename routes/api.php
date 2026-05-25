@@ -1,26 +1,32 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
 
-// Register user
+/*
+|--------------------------------------------------------------------------
+| API Routes — GreenBanking
+|--------------------------------------------------------------------------
+|
+| Auth routes: register, login (public)
+| Protected routes: user, logout (auth:sanctum)
+|
+*/
+
+// =====================
+// Public Routes
+// =====================
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login',    [AuthController::class, 'login']);
 
-// Login user
-Route::post('/login', [AuthController::class, 'login']);
-
-// Kirim pesan contact
+// Contact form (public)
 Route::post('/contact', [ContactController::class, 'store']);
 
-
-// Route yang butuh login (token Sanctum)
+// =====================
+// Protected Routes (membutuhkan token Sanctum)
+// =====================
 Route::middleware('auth:sanctum')->group(function () {
-
-    // Ambil data user login
-    Route::get('/user', [AuthController::class, 'user']);
-
-    // Logout user
+    Route::get('/user',    [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

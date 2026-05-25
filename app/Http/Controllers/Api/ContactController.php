@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
-use App\Models\Message;
+use App\Models\Pesan;
 use Illuminate\Http\JsonResponse;
 
 class ContactController extends Controller
@@ -14,18 +14,19 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request): JsonResponse
     {
-        // Simpan data ke database (tabel messages)
-        $message = Message::create([
+        // Simpan data ke database (tabel pesan)
+        $pesan = Pesan::create([
             'nama'        => $request->nama,
             'email'       => $request->email,
-            'organisasi'  => $request->organisasi,
-            'pesan'       => $request->pesan,
+            'subjek'      => $request->organisasi ?? 'Tanpa Organisasi',
+            'isi_pesan'   => $request->pesan,
         ]);
 
         // Return response JSON
         return response()->json([
+            'success' => true,
             'message' => 'Pesan berhasil dikirim!',
-            'data'    => $message,
+            'data'    => $pesan,
         ], 201); // 201 = data berhasil dibuat
     }
 }
