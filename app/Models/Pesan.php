@@ -16,5 +16,11 @@ class Pesan extends Model
         'email',
         'subjek',
         'isi_pesan',
+        'is_read',
     ];
+
+    public function balasan()
+    {
+        return $this->hasOne(Balasan::class, 'pesan_id');
+    }
 }

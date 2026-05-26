@@ -33,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Profile
     Route::put('/profile/update', [ProfileController::class, 'update']);
+    Route::get('/profile/messages', [ProfileController::class, 'getMessages']);
 });

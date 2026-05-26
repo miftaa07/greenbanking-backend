@@ -39,4 +39,20 @@ class ProfileController extends Controller
             'user' => $user
         ]);
     }
+
+    public function getMessages(Request $request)
+    {
+        $user = $request->user();
+
+        // Ambil riwayat pesan berdasarkan email user
+        $messages = \App\Models\Pesan::with('balasan')
+            ->where('email', $user->email)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $messages
+        ]);
+    }
 }
