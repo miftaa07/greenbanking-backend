@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile/messages', [ProfileController::class, 'getMessages']);
 
     // Admin Messages
+    Route::get('/admin/stats', [\App\Http\Controllers\Api\AdminController::class, 'getStats']);
     Route::get('/admin/messages', [\App\Http\Controllers\Api\AdminController::class, 'getMessages']);
     Route::put('/admin/messages/{id}/read', [\App\Http\Controllers\Api\AdminController::class, 'markAsRead']);
+    Route::post('/admin/messages/{id}/reply', [\App\Http\Controllers\Api\AdminController::class, 'replyMessage']);
 });
