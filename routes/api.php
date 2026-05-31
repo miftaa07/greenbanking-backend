@@ -34,4 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Profile
     Route::put('/profile/update', [ProfileController::class, 'update']);
     Route::get('/profile/messages', [ProfileController::class, 'getMessages']);
+
+    // Admin Messages
+    Route::get('/admin/messages', [\App\Http\Controllers\Api\AdminController::class, 'getMessages']);
+    Route::put('/admin/messages/{id}/read', [\App\Http\Controllers\Api\AdminController::class, 'markAsRead']);
 });
