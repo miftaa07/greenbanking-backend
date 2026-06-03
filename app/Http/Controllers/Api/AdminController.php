@@ -73,11 +73,6 @@ class AdminController extends Controller
                                               ->whereYear('created_at', now()->year)
                                               ->count();
 
-        // Fallback to a minimum number just for display purposes if there are no users yet
-        if ($pengunjungBulanIni == 0) {
-            $pengunjungBulanIni = 1247;
-        }
-
         return response()->json([
             'success' => true,
             'data' => [
